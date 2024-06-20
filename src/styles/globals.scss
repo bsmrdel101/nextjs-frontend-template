@@ -24,7 +24,7 @@
   }
 
   &::-webkit-scrollbar-track {
-    background: var(--grey-dark-3);
+    background: var(--grey-dark-2);
   }
 
   &::-webkit-scrollbar-thumb {
@@ -38,7 +38,7 @@
 }
 
 body {
-  background-color: var(--bg-color-1);
+  background-color: var(--bg-color-0);
   color: white;
   min-height: 100vh;
   height: 100%;
