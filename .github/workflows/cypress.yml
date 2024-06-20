@@ -1,9 +1,6 @@
 name: Cypress Test
 
 on:
-  push:
-    branches:
-      - main
   pull_request:
   workflow_dispatch:
 
@@ -11,12 +8,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Install dependencies
-        run: npm install
-
+      - uses: actions/checkout@v2
+      - name: Install modules
+        run: npm i
       - name: Start application server
         run: npm run dev &  # Start the server in the background
         background: true  # Ensure the server runs in the background
