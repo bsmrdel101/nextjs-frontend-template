@@ -1,11 +1,12 @@
 import { Layout } from "@/components/Layout";
+import TodoList from "@/components/TodoList";
 
 
 export default function Home() {
   return (
     <Layout title="Home">
       <main>
-        <h1>Hello World</h1>
+        <TodoList />
       </main>
     </Layout>
   );
