@@ -8,6 +8,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+    - name: Icon badge
+      uses: damienaicheh/icon-badge-action@v1.0.0
+      with:
+        images-path: 'https://creazilla-store.fra1.digitaloceanspaces.com/icons/3256559/file-type-eslint-icon-md.png'
     - uses: actions/checkout@v2
     - name: Install modules
       run: npm i
