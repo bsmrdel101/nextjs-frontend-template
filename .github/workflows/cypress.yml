@@ -8,10 +8,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Install modules
-      run: npm i
-    - name: Start client
-      run: npm run dev
-    - name: Run Cypress
-      run: npm run test:cy
+      - uses: actions/checkout@v2
+      - name: Install modules
+        run: npm install
+      - name: Start client
+        run: |
+          npm run dev &  # Start the server in the background
+          sleep 10  # Wait for the server to start (adjust as needed)
+      - name: Run Cypress tests
+        run: npm run test:cy
