@@ -9,6 +9,7 @@
     "lint": "next lint --fix",
     "test": "run-s test:unit test:cy",
     "test:unit": "jest --config=jest.config.ts --verbose",
+    "test:coverage": "jest --config=jest.config.ts --coverage",
     "test:cy": "cypress run",
     "cy:open": "cypress open"
   },
