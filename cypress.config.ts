@@ -5,9 +5,9 @@ dotenv.config({ path: '.env.local' });
 export default defineConfig({
   projectId: 'h2eja6',
   e2e: {
-    baseUrl: process.env.NEXT_PUBLIC_CY_BASE_URL,
+    baseUrl: process.env.NEXT_PUBLIC_CY_BASE_URL || 'http://localhost:3000',
     env: {
-      URL: process.env.NEXT_PUBLIC_CY_BASE_URL,
+      URL: process.env.NEXT_PUBLIC_CY_BASE_URL || 'http://localhost:3000',
     },
     watchForFileChanges: false,
     viewportWidth: 1920,
