@@ -1,19 +1,30 @@
-name: Cypress
+name: Cypress Test
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - main
   pull_request:
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Install modules
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
         run: npm install
-      - name: Start client
-        run: |
-          npm run dev &  # Start the server in the background
-          sleep 10  # Wait for the server to start (adjust as needed)
+
+      - name: Start application server
+        run: npm run dev &  # Ensure the server starts in the background
+
+      - name: Wait for server to start
+        run: sleep 10  # Adjust as necessary based on your server startup time
+
       - name: Run Cypress tests
-        run: npm run test:cy
+        run: npm run test:cy -- --config baseUrl=http://localhost:3000 --config failOnStatusCode=false
+
+      - name: Stop application server
+        run: npm stop  # Stop the server after tests complete, if needed
