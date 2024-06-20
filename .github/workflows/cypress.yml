@@ -1,0 +1,15 @@
+name: Cypress
+
+on:
+  workflow_dispatch:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install modules
+      run: npm i
+    - name: Run Cypress
+      run: npm run test:cy

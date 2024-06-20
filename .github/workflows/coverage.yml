@@ -1,0 +1,21 @@
+name: Code Climate Test & Publish
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Test & publish code coverage
+        uses: paambaati/codeclimate-action@v8.0.0
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+        with:
+          coverageCommand: npm run test:coverage
+          debug: true
