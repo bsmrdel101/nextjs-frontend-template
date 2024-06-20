@@ -1,7 +1,7 @@
 import { expect } from '@jest/globals';
 import { getCompletedTasksCount } from "@/components/TodoList";
 
-const tasks: Task[] = [
+const tasks = [
   {
     id: 1,
     name: 'Break the dishes',

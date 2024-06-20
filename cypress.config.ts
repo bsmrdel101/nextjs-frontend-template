@@ -1,9 +1,14 @@
 import { defineConfig } from "cypress";
+import * as dotenv from 'dotenv';
+dotenv.config({ path: '.env.local' });
 
 export default defineConfig({
   projectId: 'h2eja6',
   e2e: {
     baseUrl: process.env.NEXT_PUBLIC_CY_BASE_URL,
+    env: {
+      URL: process.env.NEXT_PUBLIC_CY_BASE_URL,
+    },
     watchForFileChanges: false,
     viewportWidth: 1920,
     viewportHeight: 1080,

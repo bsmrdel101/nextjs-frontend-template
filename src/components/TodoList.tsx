@@ -1,10 +1,18 @@
+import { useState } from "react";
+
+type Task = {
+  id: number
+  name: string
+  completed: boolean
+};
+
 export const getCompletedTasksCount = (tasks: Task[]) => {
   return tasks.reduce((acc, cur) => acc + (cur.completed ? 1 : 0), 0);
 };
 
 
 export default function TodoList() {
-  const tasks: Task[] = [
+  const tasksData: Task[] = [
     {
       id: 1,
       name: 'Break the dishes',
@@ -21,17 +29,34 @@ export default function TodoList() {
       completed: false,
     },
   ];
+  const [tasks, setTasks] = useState<Task[]>(tasksData);
+
+  const toggleTask = (id: number) => {
+    const newTasks = tasks.map((task: Task) => {
+      if (task.id === id) return { ...task, completed: !task.completed };
+      return task;
+    });
+    setTasks(newTasks);
+  };
 
 
   return (
-    <div className="todo-list" style={{ margin: 'auto', textAlign: 'center' }}>
+    <div style={{ margin: 'auto', textAlign: 'center' }}>
       <h1>Todo List</h1>
-      <div className="todo-list__tasks" style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
         {tasks.map((task: Task) => {
           return (
-            <div key={task.id} className="todo-list__task-item" style={{ backgroundColor: 'var(--grey-dark-3)', padding: '1rem', borderRadius: '0.5rem' }}>
-              <h3>{ task.name }</h3>
-            </div>
+            <>
+              {task.completed ?
+                <button data-cy="completed" key={task.id} onClick={() => toggleTask(task.id)} style={{ backgroundColor: 'var(--grey-dark-3)', padding: '1rem', borderRadius: '0.5rem', color: 'var(--green-0)' }}>
+                  <h3>{ task.name }</h3>
+                </button>
+                :
+                <button data-cy="not-completed" key={task.id} onClick={() => toggleTask(task.id)} style={{ backgroundColor: 'var(--grey-dark-3)', padding: '1rem', borderRadius: '0.5rem' }}>
+                  <h3>{ task.name }</h3>
+                </button>
+              }
+            </>
           );
         })}
       </div>
