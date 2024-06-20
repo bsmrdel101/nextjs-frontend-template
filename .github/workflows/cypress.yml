@@ -18,13 +18,16 @@ jobs:
         run: npm install
 
       - name: Start application server
-        run: npm run dev &  # Ensure the server starts in the background
+        run: npm run dev &  # Start the server in the background
+        background: true  # Ensure the server runs in the background
 
       - name: Wait for server to start
-        run: sleep 10  # Adjust as necessary based on your server startup time
+        run: |
+          sleep 20  # Adjust timing as needed based on your server startup time
+          curl -I http://localhost:3000  # Verify server is accessible
 
       - name: Run Cypress tests
-        run: npm run test:cy -- --config baseUrl=http://localhost:3000 --config failOnStatusCode=false
+        run: npm run test:cy -- --config baseUrl=http://localhost:3000
 
       - name: Stop application server
-        run: npm stop  # Stop the server after tests complete, if needed
+        run: npm stop  # Stop the server after tests complete, if applicable
