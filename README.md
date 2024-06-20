@@ -1,5 +1,7 @@
 # NextJS Template
 
+[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/template/WglsuF?referralCode=2dmFBO)
+
 ## Getting Started
 
 - `npm i`
