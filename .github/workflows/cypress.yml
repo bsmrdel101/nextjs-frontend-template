@@ -1,27 +1,16 @@
-name: Cypress Test
+name: Cypress
 
 on:
-  pull_request:
   workflow_dispatch:
+  pull_request:
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  cypress-run:
+    runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v4
       - name: Install modules
-        run: npm i
-      - name: Start application server
-        run: npm run dev &  # Start the server in the background
-        background: true  # Ensure the server runs in the background
-
-      - name: Wait for server to start
-        run: |
-          sleep 20  # Adjust timing as needed based on your server startup time
-          curl -I http://localhost:3000  # Verify server is accessible
-
-      - name: Run Cypress tests
-        run: npm run test:cy -- --config baseUrl=http://localhost:3000
-
-      - name: Stop application server
-        run: npm stop  # Stop the server after tests complete, if applicable
+        run: npm install
+      - name: Cypress run
+        uses: cypress-io/github-action@v6
